@@ -1,0 +1,13 @@
+<testsuites disabled="0" errors="10" failures="0" name="" tests="" time="">
+  <ZWERKS>ZFM1</ZWERKS>
+  <TAB1>
+    <ZNO>13022101</ZNO>
+    <ZORDER>2013238955</ZORDER>
+    <ZWEIGHT>4140</ZWEIGHT>
+  </TAB1>
+  <TAB1>
+    <ZNO>13022101</ZNO>
+    <ZORDER>2013238955</ZORDER>
+    <ZWEIGHT>4140</ZWEIGHT>
+  </TAB1>
+</testsuites>

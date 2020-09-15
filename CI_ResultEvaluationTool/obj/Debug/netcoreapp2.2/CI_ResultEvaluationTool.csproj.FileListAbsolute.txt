@@ -1,0 +1,11 @@
+D:\VS_Workspace\Result evaluation tool\CI_ResultEvaluationTool\CI_ResultEvaluationTool\bin\Debug\netcoreapp2.2\CI_ResultEvaluationTool.deps.json
+D:\VS_Workspace\Result evaluation tool\CI_ResultEvaluationTool\CI_ResultEvaluationTool\bin\Debug\netcoreapp2.2\CI_ResultEvaluationTool.runtimeconfig.json
+D:\VS_Workspace\Result evaluation tool\CI_ResultEvaluationTool\CI_ResultEvaluationTool\bin\Debug\netcoreapp2.2\CI_ResultEvaluationTool.runtimeconfig.dev.json
+D:\VS_Workspace\Result evaluation tool\CI_ResultEvaluationTool\CI_ResultEvaluationTool\bin\Debug\netcoreapp2.2\CI_ResultEvaluationTool.dll
+D:\VS_Workspace\Result evaluation tool\CI_ResultEvaluationTool\CI_ResultEvaluationTool\bin\Debug\netcoreapp2.2\CI_ResultEvaluationTool.pdb
+D:\VS_Workspace\Result evaluation tool\CI_ResultEvaluationTool\CI_ResultEvaluationTool\obj\Debug\netcoreapp2.2\CI_ResultEvaluationTool.csprojAssemblyReference.cache
+D:\VS_Workspace\Result evaluation tool\CI_ResultEvaluationTool\CI_ResultEvaluationTool\obj\Debug\netcoreapp2.2\CI_ResultEvaluationTool.csproj.CoreCompileInputs.cache
+D:\VS_Workspace\Result evaluation tool\CI_ResultEvaluationTool\CI_ResultEvaluationTool\obj\Debug\netcoreapp2.2\CI_ResultEvaluationTool.AssemblyInfoInputs.cache
+D:\VS_Workspace\Result evaluation tool\CI_ResultEvaluationTool\CI_ResultEvaluationTool\obj\Debug\netcoreapp2.2\CI_ResultEvaluationTool.AssemblyInfo.cs
+D:\VS_Workspace\Result evaluation tool\CI_ResultEvaluationTool\CI_ResultEvaluationTool\obj\Debug\netcoreapp2.2\CI_ResultEvaluationTool.dll
+D:\VS_Workspace\Result evaluation tool\CI_ResultEvaluationTool\CI_ResultEvaluationTool\obj\Debug\netcoreapp2.2\CI_ResultEvaluationTool.pdb

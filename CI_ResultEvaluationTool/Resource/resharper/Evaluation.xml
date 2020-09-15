@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestEvaluationRules>
+	<GlobalTestsStatus>
+		<NoError>
+      //TestFixtureResult/Result[text()='Failure']
+    </NoError> 
+	</GlobalTestsStatus>
+	<SingleTestStatus>
+		<Error>
+		//PlcTag[@Result='Failure']
+		</Error>
+		<ErrorMessage>
+		Message
+		</ErrorMessage>
+	</SingleTestStatus>
+</TestEvaluationRules>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectCheck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.siemens.com/Applications/TiaPortal/ProjectCheck/v1">
+  <Results>
+    <Result Severity="Error" Result="The program block is not a library type." Object="MoveBelt" Type="ProgramBlock" Location="\AssemblyLine\Coordinator\Program blocks\" Rule="RU002" RuleDescription="Version entirely with libraries" RuleCategory="Reusability" />
+    <Result Severity="Info" Result="Check passed." Object="Coordinator" Type="Plc" Location="\AssemblyLine\" Rule="NF010" RuleDescription="" RuleCategory="Limit the length of identifiers	Nomenclature and formatting" />
+    <Result Severity="Warning" Result="The minimum cycle time can be disabled for a time critical application." Object="Coordinator" Type="Plc" Location="\AssemblyLine\" Rule="PE016" RuleDescription="Check the setting for minimum cycle time" RuleCategory="Performance" />
+    <Result Severity="Info" Result="Check passed." Object="AssemblyLine" Type="Project" Location="\" Rule="RU001" RuleDescription="Provide blocks which can be simulated" RuleCategory="Reusability" />
+  </Results>
+  <Top10Objects>
+    <Object Name="PlcTagTable: \AssemblyLine\Coordinator\Software units\Unit_2\PLC tags\Default tag table_1" Amount="2" Percentage="20.00 %" />
+    <Object Name="SoftwareUnit: \AssemblyLine\Coordinator\Software units\Unit_1" Amount="2" Percentage="20.00 %" />
+    <Object Name="SoftwareUnit: \AssemblyLine\Coordinator\Software units\Unit_2" Amount="2" Percentage="20.00 %" />
+    <Object Name="Plc: \AssemblyLine\Coordinator" Amount="1" Percentage="10.00 %" />
+    <Object Name="ProgramBlock: \AssemblyLine\Coordinator\Program blocks\MoveBelt" Amount="1" Percentage="10.00 %" />
+    <Object Name="ProgramBlock: \AssemblyLine\Coordinator\Program blocks\GetMachineState" Amount="1" Percentage="10.00 %" />
+    <Object Name="ProgramBlock: \AssemblyLine\Coordinator\Program blocks\InstMoveInfeedBelt" Amount="1" Percentage="10.00 %" />
+  </Top10Objects>
+  <Top10Rules>
+    <Rule Name="GL003: Supply texts in all project languages" Amount="2" Percentage="20.00 %" />
+    <Rule Name="NF002: Use meaningful comments and properties" Amount="2" Percentage="20.00 %" />
+    <Rule Name="RU002: Version entirely with libraries" Amount="2" Percentage="20.00 %" />
+    <Rule Name="NF009: Limit the character set for identifiers" Amount="1" Percentage="10.00 %" />
+    <Rule Name="PE016: Check the setting for minimum cycle time" Amount="1" Percentage="10.00 %" />
+    <Rule Name="AL001: Use multi-instances instead of single instances" Amount="1" Percentage="10.00 %" />
+    <Rule Name="NF005: Use PascalCasing for objects" Amount="1" Percentage="10.00 %" />
+  </Top10Rules>
+</ProjectCheck>

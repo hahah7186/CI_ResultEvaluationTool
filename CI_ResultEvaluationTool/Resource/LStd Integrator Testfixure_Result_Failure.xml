@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///C:/Users/SchuhT/Desktop/03_Automatisches_Testen/S7UnitTest_1.1.0.0/S7UnitTest_TestResult.xslt"?>
+<TestFixtureResult xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <StoragePath>C:\Users\tia\Desktop\LiveDemo\LiveDemo_II\TestData</StoragePath>
+  <PlcInstanceName>PLCSim Integrator Test</PlcInstanceName>
+  <CpuType>CPU1500_Unspecified</CpuType>
+  <TestCases>
+    <TestCase xsi:type="TestCaseResult" Name="From zero to Setpoint" Author="siemens" CreationDate="2017-02-23T15:51:01.7169673+01:00" Version="0.0.1" ExecutionDate="2020-07-06T10:06:17.7208081Z" Result="Failure">
+      <Description>Verhalten des Integrators von NULL zum SOLLWERT 2.0</Description>
+      <TestSteps>
+        <TestStep xsi:type="TestStepResult" PlcCycle="1" Name="Set SETPOINT to 2.0" Result="Success">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0" MaxValueDifference="2" ExpectedType="Real" ExpectedValue="0.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="20" Name="Check if SETPOINT reached" Result="Failure">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0.3799407" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Failure">
+              <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3799407 (Max Allowed Diff=0.3)</Message>
+            </PlcTag>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+          <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3799407 (Max Allowed Diff=0.3)</Message>
+        </TestStep>
+      </TestSteps>
+      <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3799407 (Max Allowed Diff=0.3)</Message>
+    </TestCase>
+    <TestCase xsi:type="TestCaseResult" Name="From Setpoint to positive Setpoint" Author="siemens" CreationDate="2017-02-23T15:52:28.5609345+01:00" Version="0.0.1" ExecutionDate="2020-07-06T10:06:20.6127531Z" Result="Failure">
+      <Description>Verhalten des Integrators von SOLLWERT 2.0 zum SOLLWERT 3.0</Description>
+      <TestSteps>
+        <TestStep xsi:type="TestStepResult" PlcCycle="1" Name="Set SETPOINT to 2.0" Result="Success">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0" MaxValueDifference="2" ExpectedType="Real" ExpectedValue="0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="20" Name="Check first SETPOINT reached" Result="Failure">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0.3800667" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Failure">
+              <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3800667 (Max Allowed Diff=0.3)</Message>
+            </PlcTag>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+          <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3800667 (Max Allowed Diff=0.3)</Message>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="21" Name="Set SETPOINT to 3.0" Result="Failure">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="3.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0.4000638" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Failure">
+              <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.4000638 (Max Allowed Diff=0.3)</Message>
+            </PlcTag>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+          <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.4000638 (Max Allowed Diff=0.3)</Message>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="30" Name="Check second SETPOINT reached" Result="Failure">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="3.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0.5802978" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="3.0" Result="Failure">
+              <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 3.0, But was: 0.5802978 (Max Allowed Diff=0.3)</Message>
+            </PlcTag>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+          <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 3.0, But was: 0.5802978 (Max Allowed Diff=0.3)</Message>
+        </TestStep>
+      </TestSteps>
+      <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3800667 (Max Allowed Diff=0.3)</Message>
+    </TestCase>
+    <TestCase xsi:type="TestCaseResult" Name="From Setpoint to Zero" Author="siemens" CreationDate="2017-02-23T15:52:52.1082813+01:00" Version="0.0.1" ExecutionDate="2020-07-06T10:06:23.8730913Z" Result="Failure">
+      <Description>Verhalten des Integrators von SOLLWERT 2.0 zu Null</Description>
+      <TestSteps>
+        <TestStep xsi:type="TestStepResult" PlcCycle="1" Name="Set SETPOINT to 2.0" Result="Success">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="20" Name="Check SETPOINT reached" Result="Failure">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0.3801233" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Failure">
+              <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3801233 (Max Allowed Diff=0.3)</Message>
+            </PlcTag>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+          <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3801233 (Max Allowed Diff=0.3)</Message>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="21" Name="Set SETPOINT to ZERO" Result="Failure">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="0.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0.3601231" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Failure">
+              <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3601231 (Max Allowed Diff=0.3)</Message>
+            </PlcTag>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+          <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3601231 (Max Allowed Diff=0.3)</Message>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="40" Name="Check ZERO reached" Result="Success">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="-0.01992013" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+        </TestStep>
+      </TestSteps>
+      <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3801233 (Max Allowed Diff=0.3)</Message>
+    </TestCase>
+    <TestCase xsi:type="TestCaseResult" Name="From Zero to negativ Setpoint" Author="siemens" CreationDate="2017-02-23T15:53:04.201973+01:00" Version="0.0.1" ExecutionDate="2020-07-06T10:06:28.127272Z" Result="Failure">
+      <Description>Verhalten des Integrators von NULL zum SOLLWERT -2.0</Description>
+      <TestSteps>
+        <TestStep xsi:type="TestStepResult" PlcCycle="1" Name="Set SETPOINT to -2.0" Result="Success">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="-2.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="20" Name="Check SETPOINT reached" Result="Failure">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="-2.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="-0.3802579" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="-2.0" Result="Failure">
+              <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: -2.0, But was: -0.3802579 (Max Allowed Diff=0.3)</Message>
+            </PlcTag>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+          <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: -2.0, But was: -0.3802579 (Max Allowed Diff=0.3)</Message>
+        </TestStep>
+      </TestSteps>
+      <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: -2.0, But was: -0.3802579 (Max Allowed Diff=0.3)</Message>
+    </TestCase>
+    <TestCase xsi:type="TestCaseResult" Name="From positiv Setpoint to negativ Setpoint" Author="siemens" CreationDate="2017-02-23T15:53:28.2343476+01:00" Version="0.0.1" ExecutionDate="2020-07-06T10:06:30.328261Z" Result="Failure">
+      <Description>Verhalten des Integrators von SOLLWERT 2.0 zu SOLLWERT -2.0</Description>
+      <TestSteps>
+        <TestStep xsi:type="TestStepResult" PlcCycle="1" Name="Set SETPOINT to 2.0" Result="Success">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0" MaxValueDifference="2" ExpectedType="Real" ExpectedValue="0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="20" Name="Check SETPOINT reached" Result="Failure">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0.3800798" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Failure">
+              <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3800798 (Max Allowed Diff=0.3)</Message>
+            </PlcTag>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+          <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3800798 (Max Allowed Diff=0.3)</Message>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="21" Name="Set SETPOINT to -2.0" Result="Failure">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="-2.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="0.3600593" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Failure">
+              <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3600593 (Max Allowed Diff=0.3)</Message>
+            </PlcTag>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+          <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3600593 (Max Allowed Diff=0.3)</Message>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="60" Name="Check if SETPOINT reached" Result="Failure">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="-2.0" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Success" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" Type="Real" Value="-0.4201371" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="-2.0" Result="Failure">
+              <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: -2.0, But was: -0.4201371 (Max Allowed Diff=0.3)</Message>
+            </PlcTag>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" Type="Bool" Value="False" ExpectedType="Bool" ExpectedValue="false" Result="Success" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" Type="UInt" Value="0" ExpectedType="Word" ExpectedValue="0" Result="Success" />
+          </OutputTags>
+          <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: -2.0, But was: -0.4201371 (Max Allowed Diff=0.3)</Message>
+        </TestStep>
+      </TestSteps>
+      <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3800798 (Max Allowed Diff=0.3)</Message>
+    </TestCase>
+  </TestCases>
+  <ExecutionDate>2020-07-06T10:06:17.7164938Z</ExecutionDate>
+  <Result>Failure</Result>
+  <Message>Value of PLC Tag "LStd_Integrator_DB.ActSpeed" doesn't match! Expected: 2.0, But was: 0.3799407 (Max Allowed Diff=0.3)</Message>
+</TestFixtureResult>

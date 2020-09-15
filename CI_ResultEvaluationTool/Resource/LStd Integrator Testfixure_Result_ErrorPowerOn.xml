@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///C:/Users/SchuhT/Desktop/03_Automatisches_Testen/S7UnitTest_1.1.0.0/S7UnitTest_TestResult.xslt"?>
+<TestFixtureResult xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <StoragePath>C:\Users\tia\Desktop\LiveDemo\LiveDemo_II\TestData</StoragePath>
+  <PlcInstanceName>PLCSim Integrator Test</PlcInstanceName>
+  <CpuType>CPU1500_Unspecified</CpuType>
+  <TestCases>
+    <TestCase xsi:type="TestCaseResult" Name="From zero to Setpoint" Author="siemens" CreationDate="2017-02-23T15:51:01.7169673+01:00" Version="0.0.1" ExecutionDate="0001-01-01T00:00:00" Result="Unknown">
+      <Description>Verhalten des Integrators von NULL zum SOLLWERT 2.0</Description>
+      <TestSteps>
+        <TestStep xsi:type="TestStepResult" PlcCycle="1" Name="Set SETPOINT to 2.0" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="2" ExpectedType="Real" ExpectedValue="0.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="20" Name="Check if SETPOINT reached" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+      </TestSteps>
+    </TestCase>
+    <TestCase xsi:type="TestCaseResult" Name="From Setpoint to positive Setpoint" Author="siemens" CreationDate="2017-02-23T15:52:28.5609345+01:00" Version="0.0.1" ExecutionDate="0001-01-01T00:00:00" Result="Unknown">
+      <Description>Verhalten des Integrators von SOLLWERT 2.0 zum SOLLWERT 3.0</Description>
+      <TestSteps>
+        <TestStep xsi:type="TestStepResult" PlcCycle="1" Name="Set SETPOINT to 2.0" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="2" ExpectedType="Real" ExpectedValue="0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="20" Name="Check first SETPOINT reached" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="21" Name="Set SETPOINT to 3.0" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="3.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="30" Name="Check second SETPOINT reached" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="3.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="3.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+      </TestSteps>
+    </TestCase>
+    <TestCase xsi:type="TestCaseResult" Name="From Setpoint to Zero" Author="siemens" CreationDate="2017-02-23T15:52:52.1082813+01:00" Version="0.0.1" ExecutionDate="0001-01-01T00:00:00" Result="Unknown">
+      <Description>Verhalten des Integrators von SOLLWERT 2.0 zu Null</Description>
+      <TestSteps>
+        <TestStep xsi:type="TestStepResult" PlcCycle="1" Name="Set SETPOINT to 2.0" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="20" Name="Check SETPOINT reached" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="21" Name="Set SETPOINT to ZERO" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="0.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="40" Name="Check ZERO reached" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+      </TestSteps>
+    </TestCase>
+    <TestCase xsi:type="TestCaseResult" Name="From Zero to negativ Setpoint" Author="siemens" CreationDate="2017-02-23T15:53:04.201973+01:00" Version="0.0.1" ExecutionDate="0001-01-01T00:00:00" Result="Unknown">
+      <Description>Verhalten des Integrators von NULL zum SOLLWERT -2.0</Description>
+      <TestSteps>
+        <TestStep xsi:type="TestStepResult" PlcCycle="1" Name="Set SETPOINT to -2.0" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="-2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="20" Name="Check SETPOINT reached" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="-2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="-2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+      </TestSteps>
+    </TestCase>
+    <TestCase xsi:type="TestCaseResult" Name="From positiv Setpoint to negativ Setpoint" Author="siemens" CreationDate="2017-02-23T15:53:28.2343476+01:00" Version="0.0.1" ExecutionDate="0001-01-01T00:00:00" Result="Unknown">
+      <Description>Verhalten des Integrators von SOLLWERT 2.0 zu SOLLWERT -2.0</Description>
+      <TestSteps>
+        <TestStep xsi:type="TestStepResult" PlcCycle="1" Name="Set SETPOINT to 2.0" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="2" ExpectedType="Real" ExpectedValue="0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="20" Name="Check SETPOINT reached" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="21" Name="Set SETPOINT to -2.0" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="-2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+        <TestStep xsi:type="TestStepResult" PlcCycle="60" Name="Check if SETPOINT reached" Result="Unknown">
+          <InputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.SpeedSetpoint" ExpectedType="Real" ExpectedValue="-2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Ramp" ExpectedType="Real" ExpectedValue="1.0" Result="Unknown" />
+          </InputTags>
+          <OutputTags>
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.ActSpeed" MaxValueDifference="0.3" ExpectedType="Real" ExpectedValue="-2.0" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Error" ExpectedType="Bool" ExpectedValue="false" Result="Unknown" />
+            <PlcTag xsi:type="ValidatedPlcTag" Name="LStd_Integrator_DB.Status" ExpectedType="Word" ExpectedValue="0" Result="Unknown" />
+          </OutputTags>
+        </TestStep>
+      </TestSteps>
+    </TestCase>
+  </TestCases>
+  <ExecutionDate>2020-07-06T09:54:09.2167353Z</ExecutionDate>
+  <Result>Error</Result>
+  <Message>Failed to PowerOn PLC!</Message>
+</TestFixtureResult>

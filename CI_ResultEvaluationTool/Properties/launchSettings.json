@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CI_ResultEvaluationTool": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\VS_Workspace\\Result evaluation tool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool\\Resource\\LStd Integrator Testfixure_Result_Failure.xml\" \"D:\\VS_Workspace\\Result evaluation tool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool\\Resource\\resharper\\Evaluation.xml\""
+    }
+  }
+}
