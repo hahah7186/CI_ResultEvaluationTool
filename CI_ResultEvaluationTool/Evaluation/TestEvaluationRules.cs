@@ -33,7 +33,10 @@ namespace CI_ResultEvaluationTool.Evaluation
 
             string globalRuleString = doc.SelectSingleNode("//GlobalTestsStatus[1]/NoError[1]").InnerText;
             globalRuleString = CommonUtils.CommonUtils.ReplaceAndNewlines(globalRuleString);
-            this.globalTestsStatus = new GlobalTestsStatus(globalRuleString);
+
+            string globalTimeStamp = doc.SelectSingleNode("//GlobalTestsStatus[1]/TimeStamp[1]").InnerText;
+
+            this.globalTestsStatus = new GlobalTestsStatus(globalRuleString, globalTimeStamp);
 
             string singleResultRuleString = doc.SelectSingleNode("//SingleTestStatus[1]/Error[1]").InnerText;
             singleResultRuleString = CommonUtils.CommonUtils.ReplaceAndNewlines(singleResultRuleString);
@@ -48,13 +51,16 @@ namespace CI_ResultEvaluationTool.Evaluation
     class GlobalTestsStatus
     {
         private string globalRuleString;
+        private string globalTimeStamp;
 
-        public GlobalTestsStatus(string globalRuleString)
+        public GlobalTestsStatus(string globalRuleString, string globalTimeStamp)
         {
             this.globalRuleString = globalRuleString;
+            this.globalTimeStamp = globalTimeStamp;
         }
 
         public string GlobalRuleString { get => globalRuleString;  }
+        public string GlobalTimeStamp { get => globalTimeStamp;  }
     }
 
     class SingleTestStatus

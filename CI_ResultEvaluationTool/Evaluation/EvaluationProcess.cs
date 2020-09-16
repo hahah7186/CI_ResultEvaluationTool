@@ -40,6 +40,8 @@ namespace CI_ResultEvaluationTool.Evaluation
 
         private void ParseResultFile()
         {
+            int testsuitesErrors = 0;
+
             testsuites = new Testsuites();
             testsuites.Disabled = "0";
             testsuites.Errors = "10";
@@ -52,7 +54,7 @@ namespace CI_ResultEvaluationTool.Evaluation
 
             XmlDocument doc = new XmlDocument();
             doc.Load(@resultFilePath);
-            //1.获取
+            //1.1获取GlobalRuleString
             XPathNavigator GlobalRule_XPathNav = doc.CreateNavigator();
             XPathNodeIterator GlobalRuleEntryIterator = GlobalRule_XPathNav.Select(testEvaluationRules.GlobalTestsStatus.GlobalRuleString);
 
@@ -61,6 +63,17 @@ namespace CI_ResultEvaluationTool.Evaluation
             while (GlobalRuleEntryIterator.MoveNext()) {
                 XPathNavigator itemNav = GlobalRuleEntryIterator.Current;
                 TotalResult = itemNav.Value;
+            }
+            //1.2获取GlobalTimeStamp
+            XPathNavigator GlobalTimeStamp_XPathNav = doc.CreateNavigator();
+            XPathNodeIterator GlobalTimeStampEntryIterator = GlobalTimeStamp_XPathNav.Select(testEvaluationRules.GlobalTestsStatus.GlobalTimeStamp);
+
+            string GlobalTimeStamp = "";
+
+            while (GlobalTimeStampEntryIterator.MoveNext())
+            {
+                XPathNavigator itemNav = GlobalTimeStampEntryIterator.Current;
+                GlobalTimeStamp = itemNav.Value;
             }
 
             //2.
@@ -92,6 +105,8 @@ namespace CI_ResultEvaluationTool.Evaluation
                 failure.Type = "ValueMismatch";
 
                 testcase.SetFailure(failure);
+                testsuitesErrors++;
+
 
                 testcases.Add(testcase);
             }
@@ -105,11 +120,12 @@ namespace CI_ResultEvaluationTool.Evaluation
             testsuite.Id = "0";
             testsuite.Skipped = "0";
             testsuite.Time = "";
-            testsuite.Timestamp = "";
+            testsuite.Timestamp = GlobalTimeStamp;
             testsuite.Testcases = testcases;
 
+            testsuites.TestsuiteList = new List<Testsuite>();
             testsuites.TestsuiteList.Add(testsuite);
-
+            testsuites.Errors = testsuitesErrors.ToString();
             GenerateJUNITXML(fileName);
         }
 
@@ -123,7 +139,7 @@ namespace CI_ResultEvaluationTool.Evaluation
             XmlElement testsuiteRootNode = document.CreateElement("", "testsuites", "");
             testsuiteRootNode.SetAttribute("disabled", testsuites.Disabled);
             testsuiteRootNode.SetAttribute("errors", testsuites.Errors);
-            testsuiteRootNode.SetAttribute("failures", testsuites.Errors);
+            testsuiteRootNode.SetAttribute("failures", testsuites.Failures);
             testsuiteRootNode.SetAttribute("name", testsuites.Name);
             testsuiteRootNode.SetAttribute("tests", testsuites.Tests);
             testsuiteRootNode.SetAttribute("time", testsuites.Time);
@@ -140,6 +156,24 @@ namespace CI_ResultEvaluationTool.Evaluation
                 testsuiteNode.SetAttribute("skipped", "0");
                 testsuiteNode.SetAttribute("time", "");
                 testsuiteNode.SetAttribute("timestamp", "2020-07-06T10:06:17.7164938Z");
+
+                foreach (Testcase testcase in testsuite.Testcases) {
+                    XmlElement testcaseNode = document.CreateElement("testcase");
+                    testcaseNode.SetAttribute("name", testcase.Name);
+                    testcaseNode.SetAttribute("assertions", "1");
+                    testcaseNode.SetAttribute("classname", testcase.Classname);
+                    testcaseNode.SetAttribute("status", "");
+                    testcaseNode.SetAttribute("time", "");
+
+                    XmlElement failureNode = document.CreateElement("failure");
+                    failureNode.SetAttribute("message", testcase.GetFailure().Message);
+                    failureNode.SetAttribute("type", testcase.GetFailure().Type);
+                    testcaseNode.AppendChild(failureNode);
+
+                    testsuiteNode.AppendChild(testcaseNode);
+                }
+
+                testsuiteRootNode.AppendChild(testsuiteNode);
             }
 
             //XmlElement zwerks = document.CreateElement("ZWERKS");
@@ -176,7 +210,7 @@ namespace CI_ResultEvaluationTool.Evaluation
             //zweight2.InnerText = "4140";
             //tab2.AppendChild(zweight2);
 
-            document.Save("../../Output/" + filename + ".xml");//将生成好的xml保存到test.xml文件中
+            document.Save("../../../Output/" + filename + "_junit.xml");//将生成好的xml保存到test.xml文件中
 
         }
 

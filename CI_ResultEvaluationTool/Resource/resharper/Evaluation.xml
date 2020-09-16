@@ -2,8 +2,11 @@
 <TestEvaluationRules>
 	<GlobalTestsStatus>
 		<NoError>
-      //TestFixtureResult/Result[text()='Failure']
-    </NoError> 
+		  //TestFixtureResult/Result[text()='Failure']
+		</NoError>
+		<TimeStamp>
+		 //TestFixtureResult/ExecutionDate
+		</TimeStamp>	
 	</GlobalTestsStatus>
 	<SingleTestStatus>
 		<Error>
