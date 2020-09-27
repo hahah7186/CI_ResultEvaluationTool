@@ -40,7 +40,8 @@ namespace CI_ResultEvaluationTool.Evaluation
 
         private void ParseResultFile()
         {
-            int testsuitesErrors = 0;
+            int errorCount = 0;
+            int testCount = 0;
 
             testsuites = new Testsuites();
             testsuites.Disabled = "0";
@@ -54,7 +55,7 @@ namespace CI_ResultEvaluationTool.Evaluation
 
             XmlDocument doc = new XmlDocument();
             doc.Load(@resultFilePath);
-            //1.1获取GlobalRuleString
+            //1.1 Get GlobalRuleString
             XPathNavigator GlobalRule_XPathNav = doc.CreateNavigator();
             XPathNodeIterator GlobalRuleEntryIterator = GlobalRule_XPathNav.Select(testEvaluationRules.GlobalTestsStatus.GlobalRuleString);
 
@@ -64,7 +65,7 @@ namespace CI_ResultEvaluationTool.Evaluation
                 XPathNavigator itemNav = GlobalRuleEntryIterator.Current;
                 TotalResult = itemNav.Value;
             }
-            //1.2获取GlobalTimeStamp
+            //1.2 Get GlobalTimeStamp
             XPathNavigator GlobalTimeStamp_XPathNav = doc.CreateNavigator();
             XPathNodeIterator GlobalTimeStampEntryIterator = GlobalTimeStamp_XPathNav.Select(testEvaluationRules.GlobalTestsStatus.GlobalTimeStamp);
 
@@ -76,9 +77,30 @@ namespace CI_ResultEvaluationTool.Evaluation
                 GlobalTimeStamp = itemNav.Value;
             }
 
-            //2.
+            //2.1 Get SingleResultTestString of all the tests
+            List<Testcase> testTestcases = new List<Testcase>();
+            XPathNavigator SingleRuleTest_XPathNav = doc.CreateNavigator();
+            XPathNodeIterator SingleRuleTestEntryIterator = SingleRuleTest_XPathNav.Select(testEvaluationRules.SingleTestStatus.SingleResultTestString);
 
-            List<Testcase> testcases = new List<Testcase>();
+            while (SingleRuleTestEntryIterator.MoveNext())
+            {
+                Testcase testcase = new Testcase();
+
+                XPathNavigator itemNav = SingleRuleTestEntryIterator.Current;
+                string name = itemNav.GetAttribute("Name", "");
+                string classname = itemNav.GetAttribute("xsi:type", "");
+
+                testcase.Name = name;
+                testcase.Classname = classname;
+                testcase.Assertions = "1";
+                testcase.Status = "";
+                testcase.Time = "";
+                testCount++;
+                testTestcases.Add(testcase);
+            }
+
+            //2.2 Get SingleResultTestString of all the errors
+            List<Testcase> errorTestcases = new List<Testcase>();
 
             XPathNavigator SingleRule_XPathNav = doc.CreateNavigator();
             XPathNodeIterator SingleRuleEntryIterator = SingleRule_XPathNav.Select(testEvaluationRules.SingleTestStatus.SingleResultRuleString);
@@ -105,27 +127,28 @@ namespace CI_ResultEvaluationTool.Evaluation
                 failure.Type = "ValueMismatch";
 
                 testcase.SetFailure(failure);
-                testsuitesErrors++;
+                errorCount++;
 
 
-                testcases.Add(testcase);
+                errorTestcases.Add(testcase);
             }
 
             string fileName = System.IO.Path.GetFileNameWithoutExtension(@resultFilePath);
             testsuite.Name = fileName;
-            testsuite.Tests = "30";
+            testsuite.Tests = testCount.ToString();
             testsuite.Disabled = "0";
-            testsuite.Errors = "10";
+            testsuite.Errors = errorCount.ToString();
             testsuite.Failures = "0";
             testsuite.Id = "0";
             testsuite.Skipped = "0";
             testsuite.Time = "";
             testsuite.Timestamp = GlobalTimeStamp;
-            testsuite.Testcases = testcases;
+            testsuite.Testcases = errorTestcases;
 
             testsuites.TestsuiteList = new List<Testsuite>();
             testsuites.TestsuiteList.Add(testsuite);
-            testsuites.Errors = testsuitesErrors.ToString();
+            testsuites.Errors = errorCount.ToString();
+            testsuites.Tests = testCount.ToString();
             GenerateJUNITXML(fileName);
         }
 
@@ -148,14 +171,14 @@ namespace CI_ResultEvaluationTool.Evaluation
             foreach (Testsuite testsuite in testsuites.TestsuiteList) {
                 XmlElement testsuiteNode = document.CreateElement("testsuite");
                 testsuiteNode.SetAttribute("name",testsuite.Name);
-                testsuiteNode.SetAttribute("tests", "30");
+                testsuiteNode.SetAttribute("tests", testsuite.Tests);
                 testsuiteNode.SetAttribute("disabled", "0");
                 testsuiteNode.SetAttribute("errors", "10");
                 testsuiteNode.SetAttribute("failures", "0");
                 testsuiteNode.SetAttribute("id", "0");
                 testsuiteNode.SetAttribute("skipped", "0");
                 testsuiteNode.SetAttribute("time", "");
-                testsuiteNode.SetAttribute("timestamp", "2020-07-06T10:06:17.7164938Z");
+                testsuiteNode.SetAttribute("timestamp", testsuite.Timestamp);
 
                 foreach (Testcase testcase in testsuite.Testcases) {
                     XmlElement testcaseNode = document.CreateElement("testcase");

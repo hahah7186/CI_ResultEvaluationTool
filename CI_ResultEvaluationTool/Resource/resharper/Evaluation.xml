@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TestEvaluationRules>
 	<GlobalTestsStatus>
-		<NoError>
-		  //TestFixtureResult/Result[text()='Failure']
-		</NoError>
+		<Failure>
+		 //TestFixtureResult/Result[text()='Failure']
+		</Failure>
 		<TimeStamp>
 		 //TestFixtureResult/ExecutionDate
 		</TimeStamp>	
 	</GlobalTestsStatus>
 	<SingleTestStatus>
+		<Test>
+		 //PlcTag
+		</Test>
+		<Failure></Failure>
+		<Success></Suc
+		<Skip>
 		<Error>
-		//PlcTag[@Result='Failure']
+			<ErrorRule>
+			 //PlcTag[@Result='Failure']
+			</ErrorRule>
+			<ErrorMessage>
+			 Message
+			</ErrorMessage>
 		</Error>
-		<ErrorMessage>
-		Message
-		</ErrorMessage>
 	</SingleTestStatus>
 </TestEvaluationRules>
