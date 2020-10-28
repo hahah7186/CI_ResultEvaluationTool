@@ -11,6 +11,8 @@ namespace CI_ResultEvaluationTool
             //Get all the Result files and Evaluation files.
             string[] filePaths = args;
 
+            int result = 0;
+
             List<EvaluationProcess> evaluationList = new List<EvaluationProcess>();
 
             //Determine if the args appears in pairs. 
@@ -23,7 +25,6 @@ namespace CI_ResultEvaluationTool
             {//If in pairs, means that result file corresponds to evaluation file.
                 for (int i = 0; i < filePaths.Length; i += 2)
                 {
-
                     //For both paired files, new create an Object Evaluation
                     EvaluationProcess evaluation = new EvaluationProcess(filePaths[i], filePaths[i + 1]);
 
@@ -31,7 +32,15 @@ namespace CI_ResultEvaluationTool
                 }
             }
 
-            return 0;
+            foreach (EvaluationProcess eva in evaluationList) {
+                if (eva.parseResult == -1) {
+                    result = -1;
+                    break;
+                }
+            }
+
+
+            return result;
         }
     }
 }

@@ -16,6 +16,8 @@ namespace CI_ResultEvaluationTool.Evaluation
             UnittestTool = 2,
             Others = 4
         };
+        //Initialize the parse result equals -1.
+        public int parseResult = -1;
 
         private ResultFileType resultFileType;
 
@@ -41,8 +43,18 @@ namespace CI_ResultEvaluationTool.Evaluation
         private void ParseResultFile()
         {
             int errorCount = 0;
+            int failureCount = 0;
+            int skipCount = 0;
+            int successCount = 0;
             int testCount = 0;
 
+            List<Testcase> testTestcases = new List<Testcase>();
+            List<Testcase> failureTestcases = new List<Testcase>();
+            List<Testcase> errorTestcases = new List<Testcase>();
+            List<Testcase> successTestcases = new List<Testcase>();
+            List<Testcase> skipTestcases = new List<Testcase>();
+
+            //Initialize Testsuites label.
             testsuites = new Testsuites();
             testsuites.Disabled = "0";
             testsuites.Errors = "10";
@@ -50,25 +62,25 @@ namespace CI_ResultEvaluationTool.Evaluation
             testsuites.Name = "";
             testsuites.Tests = "20";
             testsuites.Time = "";
-
+            //New create testsuite label.
             Testsuite testsuite = new Testsuite();
-
+            //Read result file path from input params.
             XmlDocument doc = new XmlDocument();
             doc.Load(@resultFilePath);
             //1.1 Get GlobalRuleString
             XPathNavigator GlobalRule_XPathNav = doc.CreateNavigator();
             XPathNodeIterator GlobalRuleEntryIterator = GlobalRule_XPathNav.Select(testEvaluationRules.GlobalTestsStatus.GlobalRuleString);
-
-            string TotalResult = "";
+            //Get global result from result file.
+            string GlobalResult = "";
 
             while (GlobalRuleEntryIterator.MoveNext()) {
                 XPathNavigator itemNav = GlobalRuleEntryIterator.Current;
-                TotalResult = itemNav.Value;
+                GlobalResult = itemNav.Value;
             }
             //1.2 Get GlobalTimeStamp
             XPathNavigator GlobalTimeStamp_XPathNav = doc.CreateNavigator();
             XPathNodeIterator GlobalTimeStampEntryIterator = GlobalTimeStamp_XPathNav.Select(testEvaluationRules.GlobalTestsStatus.GlobalTimeStamp);
-
+            //Get global time stamp from result file.
             string GlobalTimeStamp = "";
 
             while (GlobalTimeStampEntryIterator.MoveNext())
@@ -77,79 +89,213 @@ namespace CI_ResultEvaluationTool.Evaluation
                 GlobalTimeStamp = itemNav.Value;
             }
 
-            //2.1 Get SingleResultTestString of all the tests
-            List<Testcase> testTestcases = new List<Testcase>();
-            XPathNavigator SingleRuleTest_XPathNav = doc.CreateNavigator();
-            XPathNodeIterator SingleRuleTestEntryIterator = SingleRuleTest_XPathNav.Select(testEvaluationRules.SingleTestStatus.SingleResultTestString);
+            //2.1 Get SingleResultTestString of all the TESTS
+            if (testEvaluationRules.SingleTestStatus.SingleResultTestRuleString != "") {
+                XPathNavigator SingleRuleTest_XPathNav = doc.CreateNavigator();
+                XPathNodeIterator SingleRuleTestEntryIterator = SingleRuleTest_XPathNav.Select(testEvaluationRules.SingleTestStatus.SingleResultTestRuleString);
 
-            while (SingleRuleTestEntryIterator.MoveNext())
-            {
-                Testcase testcase = new Testcase();
+                while (SingleRuleTestEntryIterator.MoveNext())
+                {
+                    Testcase testcase = new Testcase();
 
-                XPathNavigator itemNav = SingleRuleTestEntryIterator.Current;
-                string name = itemNav.GetAttribute("Name", "");
-                string classname = itemNav.GetAttribute("xsi:type", "");
+                    XPathNavigator itemNav = SingleRuleTestEntryIterator.Current;
+                    string name = itemNav.GetAttribute("Name", "");
+                    string classname = itemNav.GetAttribute("xsi:type", "");
 
-                testcase.Name = name;
-                testcase.Classname = classname;
-                testcase.Assertions = "1";
-                testcase.Status = "";
-                testcase.Time = "";
-                testCount++;
-                testTestcases.Add(testcase);
+                    testcase.Name = name;
+                    testcase.Classname = classname;
+                    testcase.Assertions = "1";
+                    testcase.Status = "";
+                    testcase.Time = "";
+                    testCount++;
+                    testTestcases.Add(testcase);
+                }
             }
 
-            //2.2 Get SingleResultTestString of all the errors
-            List<Testcase> errorTestcases = new List<Testcase>();
 
-            XPathNavigator SingleRule_XPathNav = doc.CreateNavigator();
-            XPathNodeIterator SingleRuleEntryIterator = SingleRule_XPathNav.Select(testEvaluationRules.SingleTestStatus.SingleResultRuleString);
+            //2.2 Get SingleResultErrorRuleString of all the ERRORS.
+            if (testEvaluationRules.SingleTestStatus.SingleResultErrorRuleString != "") {
+                XPathNavigator SingleRule_XPathNav = doc.CreateNavigator();
+                XPathNodeIterator SingleRuleEntryIterator = SingleRule_XPathNav.Select(testEvaluationRules.SingleTestStatus.SingleResultErrorRuleString);
 
-            while (SingleRuleEntryIterator.MoveNext())
-            {
-                Testcase testcase = new Testcase();
+                while (SingleRuleEntryIterator.MoveNext())
+                {
+                    Testcase testcase = new Testcase();
 
-                XPathNavigator itemNav = SingleRuleEntryIterator.Current;
-                string name = itemNav.GetAttribute("Name", "");
-                string classname = itemNav.GetAttribute("xsi:type", "");
+                    XPathNavigator itemNav = SingleRuleEntryIterator.Current;
+                    string name = itemNav.GetAttribute("Name", "");
+                    string classname = itemNav.GetAttribute("xsi:type", "");
 
-                testcase.Name = name;
-                testcase.Classname = classname;
-                testcase.Assertions = "1";
-                testcase.Status = "";
-                testcase.Time = "";
+                    testcase.Name = name;
+                    testcase.Classname = classname;
+                    testcase.Assertions = "1";
+                    testcase.Status = "";
+                    testcase.Time = "";
 
-                Failure failure = new Failure();
-                
-                string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultMessageString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultMessageString).Value : "";
+                    Failure failure = new Failure();
 
-                failure.Message = message;
-                failure.Type = "ValueMismatch";
+                    string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultErrorMessageString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultErrorMessageString).Value : "";
 
-                testcase.SetFailure(failure);
-                errorCount++;
+                    failure.Message = message;
+                    failure.Type = "ValueMismatch";
+
+                    testcase.SetFailure(failure);
+                    errorCount++;
 
 
-                errorTestcases.Add(testcase);
+                    errorTestcases.Add(testcase);
+                }
             }
+
+            //2.3 Get SingleResultFailureRuleString of all the FAILURE.
+            if (testEvaluationRules.SingleTestStatus.SingleResultFailureRuleString != "")
+            {
+                XPathNavigator SingleRule_XPathNav = doc.CreateNavigator();
+                XPathNodeIterator SingleRuleEntryIterator = SingleRule_XPathNav.Select(testEvaluationRules.SingleTestStatus.SingleResultFailureRuleString);
+
+                while (SingleRuleEntryIterator.MoveNext())
+                {
+                    Testcase testcase = new Testcase();
+
+                    XPathNavigator itemNav = SingleRuleEntryIterator.Current;
+                    string name = itemNav.GetAttribute("Name", "");
+                    string classname = itemNav.GetAttribute("xsi:type", "");
+
+                    testcase.Name = name;
+                    testcase.Classname = classname;
+                    testcase.Assertions = "1";
+                    testcase.Status = "";
+                    testcase.Time = "";
+
+                    Failure failure = new Failure();
+
+                    string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultFailureMessageString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultFailureMessageString).Value : "";
+
+                    failure.Message = message;
+                    failure.Type = "ValueMismatch";
+
+                    testcase.SetFailure(failure);
+                    failureCount++;
+
+
+                    failureTestcases.Add(testcase);
+                }
+            }
+
+            //2.4 Get SingleResultSuccessRuleString of all the SUCCESS.
+            if (testEvaluationRules.SingleTestStatus.SingleResultSuccessRuleString != "")
+            {
+                XPathNavigator SingleRule_XPathNav = doc.CreateNavigator();
+                XPathNodeIterator SingleRuleEntryIterator = SingleRule_XPathNav.Select(testEvaluationRules.SingleTestStatus.SingleResultSuccessRuleString);
+
+                while (SingleRuleEntryIterator.MoveNext())
+                {
+                    Testcase testcase = new Testcase();
+
+                    XPathNavigator itemNav = SingleRuleEntryIterator.Current;
+                    string name = itemNav.GetAttribute("Name", "");
+                    string classname = itemNav.GetAttribute("xsi:type", "");
+
+                    testcase.Name = name;
+                    testcase.Classname = classname;
+                    testcase.Assertions = "1";
+                    testcase.Status = "";
+                    testcase.Time = "";
+
+                    Failure failure = new Failure();
+
+                    string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultSuccessRuleString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultSuccessRuleString).Value : "";
+
+                    failure.Message = message;
+                    failure.Type = "ValueMismatch";
+
+                    testcase.SetFailure(failure);
+                    successCount++;
+
+
+                    successTestcases.Add(testcase);
+                }
+            }
+
+
+            //2.4 Get SingleResultSkipedRuleString of all the SUCCESS.
+            if (testEvaluationRules.SingleTestStatus.SingleResultSkippedRuleString != "")
+            {
+                XPathNavigator SingleRule_XPathNav = doc.CreateNavigator();
+                XPathNodeIterator SingleRuleEntryIterator = SingleRule_XPathNav.Select(testEvaluationRules.SingleTestStatus.SingleResultSkippedRuleString);
+
+                while (SingleRuleEntryIterator.MoveNext())
+                {
+                    Testcase testcase = new Testcase();
+
+                    XPathNavigator itemNav = SingleRuleEntryIterator.Current;
+                    string name = itemNav.GetAttribute("Name", "");
+                    string classname = itemNav.GetAttribute("xsi:type", "");
+
+                    testcase.Name = name;
+                    testcase.Classname = classname;
+                    testcase.Assertions = "1";
+                    testcase.Status = "";
+                    testcase.Time = "";
+
+                    Failure failure = new Failure();
+
+                    string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultSkippedRuleString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultSkippedRuleString).Value : "";
+
+                    failure.Message = message;
+                    failure.Type = "ValueMismatch";
+
+                    testcase.SetFailure(failure);
+                    skipCount++;
+
+
+                    skipTestcases.Add(testcase);
+                }
+            }
+
+            List<Testcase> totalTestcases = new List<Testcase>();
+            //if (testTestcases.Count > 0) {
+            //    totalTestcases.AddRange(testTestcases);
+            //}
+            if (errorTestcases.Count > 0) {
+                totalTestcases.AddRange(errorTestcases);
+            }
+            if (successTestcases.Count > 0) {
+                totalTestcases.AddRange(successTestcases);
+            }
+            if (skipTestcases.Count > 0) {
+                totalTestcases.AddRange(skipTestcases);
+            }
+            if (failureTestcases.Count > 0) {
+                totalTestcases.AddRange(failureTestcases);
+            }
+
 
             string fileName = System.IO.Path.GetFileNameWithoutExtension(@resultFilePath);
             testsuite.Name = fileName;
             testsuite.Tests = testCount.ToString();
             testsuite.Disabled = "0";
             testsuite.Errors = errorCount.ToString();
-            testsuite.Failures = "0";
+            testsuite.Failures = failureCount.ToString();
             testsuite.Id = "0";
-            testsuite.Skipped = "0";
+            testsuite.Skipped = skipCount.ToString();
             testsuite.Time = "";
             testsuite.Timestamp = GlobalTimeStamp;
-            testsuite.Testcases = errorTestcases;
+            testsuite.Testcases = totalTestcases;
 
             testsuites.TestsuiteList = new List<Testsuite>();
             testsuites.TestsuiteList.Add(testsuite);
             testsuites.Errors = errorCount.ToString();
             testsuites.Tests = testCount.ToString();
+            testsuites.Failures = failureCount.ToString();
             GenerateJUNITXML(fileName);
+
+            if (GlobalResult == "Failure") {
+                this.parseResult = -1;
+            } else if (GlobalResult == "Success") {
+                this.parseResult = 0;
+            }
+
         }
 
         private void GenerateJUNITXML(string filename)
@@ -172,11 +318,11 @@ namespace CI_ResultEvaluationTool.Evaluation
                 XmlElement testsuiteNode = document.CreateElement("testsuite");
                 testsuiteNode.SetAttribute("name",testsuite.Name);
                 testsuiteNode.SetAttribute("tests", testsuite.Tests);
-                testsuiteNode.SetAttribute("disabled", "0");
-                testsuiteNode.SetAttribute("errors", "10");
-                testsuiteNode.SetAttribute("failures", "0");
+                testsuiteNode.SetAttribute("disabled", testsuite.Disabled);
+                testsuiteNode.SetAttribute("errors", testsuite.Errors);
+                testsuiteNode.SetAttribute("failures", testsuite.Failures);
                 testsuiteNode.SetAttribute("id", "0");
-                testsuiteNode.SetAttribute("skipped", "0");
+                testsuiteNode.SetAttribute("skipped", testsuite.Skipped);
                 testsuiteNode.SetAttribute("time", "");
                 testsuiteNode.SetAttribute("timestamp", testsuite.Timestamp);
 
@@ -187,12 +333,12 @@ namespace CI_ResultEvaluationTool.Evaluation
                     testcaseNode.SetAttribute("classname", testcase.Classname);
                     testcaseNode.SetAttribute("status", "");
                     testcaseNode.SetAttribute("time", "");
-
-                    XmlElement failureNode = document.CreateElement("failure");
-                    failureNode.SetAttribute("message", testcase.GetFailure().Message);
-                    failureNode.SetAttribute("type", testcase.GetFailure().Type);
-                    testcaseNode.AppendChild(failureNode);
-
+                    if (testcase.GetFailure().Message != "") {
+                        XmlElement failureNode = document.CreateElement("failure");
+                        failureNode.SetAttribute("message", testcase.GetFailure().Message);
+                        failureNode.SetAttribute("type", testcase.GetFailure().Type);
+                        testcaseNode.AppendChild(failureNode);
+                    }
                     testsuiteNode.AppendChild(testcaseNode);
                 }
 

@@ -9,19 +9,46 @@
 		</TimeStamp>	
 	</GlobalTestsStatus>
 	<SingleTestStatus>
-		<Test>
-		 //PlcTag
-		</Test>
-		<Failure></Failure>
-		<Success></Suc
-		<Skip>
-		<Error>
-			<ErrorRule>
-			 //PlcTag[@Result='Failure']
-			</ErrorRule>
-			<ErrorMessage>
+		<!--The total number of tests in the suite-->
+		<Tests>
+			<Rule>
+			//PlcTag
+			</Rule>
+		</Tests>
+		<!--The total number of tests in the suite that failed. 
+			A failure is a test which the code has explicitly failed by using the mechanisms for that purpose. 
+			e.g., via an assertEquals
+		-->
+		<Failures>
+			<Rule>
+			//PlcTag[@Result='Failure']
+			</Rule>
+			<Message>
+			Message
+			</Message>
+		</Failures>
+		<Successes>
+			<Rule>
+			//PlcTag[@Result='Success']
+			</Rule>
+		</Successes>
+		<!--The total number of ignored or skipped tests in the suite.-->
+		<Skipped>
+			<Rule>
+			//PlcTag[@Result='Skipped']
+			</Rule>
+		</Skipped>
+		<!--The total number of tests in the suite that errored. 
+			An errored test is one that had an unanticipated problem. 
+			e.g., an unchecked throwable; or a problem with the implementation of the test.
+		-->
+		<Errors>
+			<Rule>
+			 //PlcTag[@Result='Error']
+			</Rule>
+			<Message>
 			 Message
-			</ErrorMessage>
-		</Error>
+			</Message>
+		</Errors>
 	</SingleTestStatus>
 </TestEvaluationRules>
