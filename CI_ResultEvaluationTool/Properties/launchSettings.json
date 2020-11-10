@@ -2,7 +2,7 @@
   "profiles": {
     "CI_ResultEvaluationTool": {
       "commandName": "Project",
-      "commandLineArgs": "\"D:\\VS_Workspace\\Result evaluation tool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool\\Resource\\LStd Integrator Testfixure_Result_Failure.xml\" \"D:\\VS_Workspace\\Result evaluation tool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool\\Resource\\resharper\\Evaluation.xml\""
+      "commandLineArgs": "\"D:\\VS_Workspace\\Result evaluation tool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool\\Resource\\test_xml\\NewTest_2\\TestResult_2020-10-01_18_52_02.xml\" \"D:\\VS_Workspace\\Result evaluation tool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool\\Resource\\test_xml\\NewTest_2\\Evaluation_TestResult_2020-10-01_18_52_02.xml\""
     }
   }
 }

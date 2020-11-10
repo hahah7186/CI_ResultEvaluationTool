@@ -686,23 +686,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Z00426AY\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\z00426ay\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VS_Workspace\\Result evaluation tool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool.csproj",
+      "projectUniqueName": "D:\\14_VS_Workspace\\Result evaluation tool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool.csproj",
       "projectName": "CI_ResultEvaluationTool",
-      "projectPath": "D:\\VS_Workspace\\Result evaluation tool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool.csproj",
-      "packagesPath": "C:\\Users\\Z00426AY\\.nuget\\packages\\",
-      "outputPath": "D:\\VS_Workspace\\Result evaluation tool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool\\obj\\",
+      "projectPath": "D:\\14_VS_Workspace\\Result evaluation tool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool.csproj",
+      "packagesPath": "C:\\Users\\z00426ay\\.nuget\\packages\\",
+      "outputPath": "D:\\14_VS_Workspace\\Result evaluation tool\\CI_ResultEvaluationTool\\CI_ResultEvaluationTool\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Z00426AY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\z00426ay\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -734,10 +730,16 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

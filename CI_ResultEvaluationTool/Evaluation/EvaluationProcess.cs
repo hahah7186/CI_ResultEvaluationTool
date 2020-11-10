@@ -68,26 +68,34 @@ namespace CI_ResultEvaluationTool.Evaluation
             XmlDocument doc = new XmlDocument();
             doc.Load(@resultFilePath);
             //1.1 Get GlobalRuleString
-            XPathNavigator GlobalRule_XPathNav = doc.CreateNavigator();
-            XPathNodeIterator GlobalRuleEntryIterator = GlobalRule_XPathNav.Select(testEvaluationRules.GlobalTestsStatus.GlobalRuleString);
             //Get global result from result file.
             string GlobalResult = "";
 
-            while (GlobalRuleEntryIterator.MoveNext()) {
-                XPathNavigator itemNav = GlobalRuleEntryIterator.Current;
-                GlobalResult = itemNav.Value;
+            if (testEvaluationRules.GlobalTestsStatus.GlobalRuleString != "") {
+                XPathNavigator GlobalRule_XPathNav = doc.CreateNavigator();
+                XPathNodeIterator GlobalRuleEntryIterator = GlobalRule_XPathNav.Select(testEvaluationRules.GlobalTestsStatus.GlobalRuleString);
+
+                while (GlobalRuleEntryIterator.MoveNext()) {
+                    XPathNavigator itemNav = GlobalRuleEntryIterator.Current;
+                    GlobalResult = itemNav.Value;
+                }
             }
+
             //1.2 Get GlobalTimeStamp
-            XPathNavigator GlobalTimeStamp_XPathNav = doc.CreateNavigator();
-            XPathNodeIterator GlobalTimeStampEntryIterator = GlobalTimeStamp_XPathNav.Select(testEvaluationRules.GlobalTestsStatus.GlobalTimeStamp);
             //Get global time stamp from result file.
             string GlobalTimeStamp = "";
 
-            while (GlobalTimeStampEntryIterator.MoveNext())
-            {
-                XPathNavigator itemNav = GlobalTimeStampEntryIterator.Current;
-                GlobalTimeStamp = itemNav.Value;
+            if (testEvaluationRules.GlobalTestsStatus.GlobalTimeStamp != "") {
+                XPathNavigator GlobalTimeStamp_XPathNav = doc.CreateNavigator();
+                XPathNodeIterator GlobalTimeStampEntryIterator = GlobalTimeStamp_XPathNav.Select(testEvaluationRules.GlobalTestsStatus.GlobalTimeStamp);
+            
+                while (GlobalTimeStampEntryIterator.MoveNext())
+                {
+                    XPathNavigator itemNav = GlobalTimeStampEntryIterator.Current;
+                    GlobalTimeStamp = itemNav.Value;
+                }
             }
+
 
             //2.1 Get SingleResultTestString of all the TESTS
             if (testEvaluationRules.SingleTestStatus.SingleResultTestRuleString != "") {
@@ -134,7 +142,7 @@ namespace CI_ResultEvaluationTool.Evaluation
 
                     Failure failure = new Failure();
 
-                    string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultErrorMessageString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultErrorMessageString).Value : "";
+                    string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultErrorMessageString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultErrorMessageString).Value : itemNav.GetAttribute(testEvaluationRules.SingleTestStatus.SingleResultErrorMessageString, "");
 
                     failure.Message = message;
                     failure.Type = "ValueMismatch";
@@ -169,7 +177,7 @@ namespace CI_ResultEvaluationTool.Evaluation
 
                     Failure failure = new Failure();
 
-                    string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultFailureMessageString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultFailureMessageString).Value : "";
+                    string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultFailureMessageString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultFailureMessageString).Value : itemNav.GetAttribute(testEvaluationRules.SingleTestStatus.SingleResultFailureMessageString,"");
 
                     failure.Message = message;
                     failure.Type = "ValueMismatch";
@@ -204,7 +212,7 @@ namespace CI_ResultEvaluationTool.Evaluation
 
                     Failure failure = new Failure();
 
-                    string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultSuccessRuleString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultSuccessRuleString).Value : "";
+                    string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultSuccessRuleString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultSuccessRuleString).Value : itemNav.GetAttribute(testEvaluationRules.SingleTestStatus.SingleResultSuccessRuleString, "");
 
                     failure.Message = message;
                     failure.Type = "ValueMismatch";
@@ -218,7 +226,7 @@ namespace CI_ResultEvaluationTool.Evaluation
             }
 
 
-            //2.4 Get SingleResultSkipedRuleString of all the SUCCESS.
+            //2.4 Get SingleResultSkipedRuleString of all the SKIP.
             if (testEvaluationRules.SingleTestStatus.SingleResultSkippedRuleString != "")
             {
                 XPathNavigator SingleRule_XPathNav = doc.CreateNavigator();
@@ -240,7 +248,7 @@ namespace CI_ResultEvaluationTool.Evaluation
 
                     Failure failure = new Failure();
 
-                    string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultSkippedRuleString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultSkippedRuleString).Value : "";
+                    string message = itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultSkippedRuleString) != null ? itemNav.SelectSingleNode(testEvaluationRules.SingleTestStatus.SingleResultSkippedRuleString).Value : itemNav.GetAttribute(testEvaluationRules.SingleTestStatus.SingleResultSkippedRuleString, "");
 
                     failure.Message = message;
                     failure.Type = "ValueMismatch";
